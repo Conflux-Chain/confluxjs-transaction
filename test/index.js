@@ -9,5 +9,5 @@ if (argv.f) {
 } else {
   require('./fake.js')
   require('./api.js')
-  require('./transactionRunner.js')
+  // require('./transactionRunner.js')
 }

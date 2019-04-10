@@ -1,9 +1,9 @@
 const tape = require('tape')
-const utils = require('ethereumjs-util')
+const utils = require('confluxjs-util')
 const rlp = utils.rlp
 const Transaction = require('../index.js')
 const txFixtures = require('./txs.json')
-const txFixturesEip155 = require('./ttTransactionTestEip155VitaliksTests.json')
+// const txFixturesEip155 = require('./ttTransactionTestEip155VitaliksTests.json')
 tape('[Transaction]: Basic functions', function (t) {
   var transactions = []
 
@@ -33,19 +33,21 @@ tape('[Transaction]: Basic functions', function (t) {
 
   t.test('should hash', function (st) {
     var tx = new Transaction(txFixtures[2].raw)
-    st.deepEqual(tx.hash(), new Buffer('375a8983c9fc56d7cfd118254a80a8d7403d590a6c9e105532b67aca1efb97aa', 'hex'))
+    // var cmpHash = '375a8983c9fc56d7cfd118254a80a8d7403d590a6c9e105532b67aca1efb97aa'
+    var cmpHash = 'd9c4b991b1be02e1edddc301cb053cca52fd37b6db13c08fe0832dfd3024b263'
+    st.deepEqual(tx.hash(), new Buffer(cmpHash, 'hex'))
     st.deepEqual(tx.hash(false), new Buffer('61e1ec33764304dddb55348e7883d4437426f44ab3ef65e6da1e025734c03ff0', 'hex'))
-    st.deepEqual(tx.hash(true), new Buffer('375a8983c9fc56d7cfd118254a80a8d7403d590a6c9e105532b67aca1efb97aa', 'hex'))
+    st.deepEqual(tx.hash(true), new Buffer(cmpHash, 'hex'))
     st.end()
   })
 
-  t.test('should hash with defined chainId', function (st) {
-    var tx = new Transaction(txFixtures[3].raw)
-    st.equal(tx.hash().toString('hex'), '0f09dc98ea85b7872f4409131a790b91e7540953992886fc268b7ba5c96820e4')
-    st.equal(tx.hash(true).toString('hex'), '0f09dc98ea85b7872f4409131a790b91e7540953992886fc268b7ba5c96820e4')
-    st.equal(tx.hash(false).toString('hex'), 'f97c73fdca079da7652dbc61a46cd5aeef804008e057be3e712c43eac389aaf0')
-    st.end()
-  })
+  // t.test('should hash with defined chainId', function (st) {
+  //   var tx = new Transaction(txFixtures[3].raw)
+  //   st.equal(tx.hash().toString('hex'), '0f09dc98ea85b7872f4409131a790b91e7540953992886fc268b7ba5c96820e4')
+  //   st.equal(tx.hash(true).toString('hex'), '0f09dc98ea85b7872f4409131a790b91e7540953992886fc268b7ba5c96820e4')
+  //   st.equal(tx.hash(false).toString('hex'), 'f97c73fdca079da7652dbc61a46cd5aeef804008e057be3e712c43eac389aaf0')
+  //   st.end()
+  // })
 
   t.test('should verify Signatures', function (st) {
     transactions.forEach(function (tx) {
@@ -175,25 +177,23 @@ tape('[Transaction]: Basic functions', function (t) {
     st.end()
   })
 
-  t.test('Verify EIP155 Signature based on Vitalik\'s tests', function (st) {
-    txFixturesEip155.forEach(function (tx) {
-      var pt = new Transaction(tx.rlp)
-      st.equal(pt.hash(false).toString('hex'), tx.hash)
-      st.equal('0x' + pt.serialize().toString('hex'), tx.rlp)
-      st.equal(pt.getSenderAddress().toString('hex'), tx.sender)
-    })
-    st.end()
-  })
+  // t.test('Verify EIP155 Signature based on Vitalik\'s tests', function (st) {
+  //   txFixturesEip155.forEach(function (tx) {
+  //     var pt = new Transaction(tx.rlp)
+  //     st.equal(pt.hash(false).toString('hex'), tx.hash)
+  //     st.equal('0x' + pt.serialize().toString('hex'), tx.rlp)
+  //     st.equal(pt.getSenderAddress().toString('hex'), tx.sender)
+  //   })
+  //   st.end()
+  // })
 
-  t.test('sign tx with chainId specified in params', function (st) {
-    var tx = new Transaction({ chainId: 42 })
-    st.equal(tx.getChainId(), 42)
+  t.test('sign tx without chainId specified in params', function (st) {
+    var tx = new Transaction()
     var privKey = new Buffer(txFixtures[0].privateKey, 'hex')
     tx.sign(privKey)
     var serialized = tx.serialize()
     var reTx = new Transaction(serialized)
     st.equal(reTx.verifySignature(), true)
-    st.equal(reTx.getChainId(), 42)
     st.end()
   })
 

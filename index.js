@@ -1,5 +1,5 @@
 'use strict'
-const ethUtil = require('ethereumjs-util')
+const ethUtil = require('confluxjs-util')
 const Common = require('ethereumjs-common')
 const BN = ethUtil.BN
 
@@ -162,6 +162,15 @@ class Transaction {
     return this.to.toString('hex') === ''
   }
 
+  serialize () {
+    console.log('before ', this.v)
+    if (this.v.equals(Buffer.from('00', 'hex'))) {
+      this.v = ''
+    }
+    console.log('after ', this.v)
+    return this.rlpSerialize()
+  }
+
   /**
    * Computes a sha3-256 hash of the serialized tx
    * @param {Boolean} [includeSignature=true] whether or not to inculde the signature
@@ -240,9 +249,11 @@ class Transaction {
 
     try {
       let v = ethUtil.bufferToInt(this.v)
+      v += 27
       if (this._chainId > 0) {
         v -= this._chainId * 2 + 8
       }
+      // console.log('v: ', v)
       this._senderPubKey = ethUtil.ecrecover(msgHash, v, this.r, this.s)
     } catch (e) {
       return false
@@ -261,6 +272,7 @@ class Transaction {
     if (this._chainId > 0) {
       sig.v += this._chainId * 2 + 8
     }
+    sig.v -= 27
     Object.assign(this, sig)
   }
 

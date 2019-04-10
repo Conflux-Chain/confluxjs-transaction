@@ -1,5 +1,5 @@
 const tape = require('tape')
-const utils = require('ethereumjs-util')
+const utils = require('confluxjs-util')
 const Common = require('ethereumjs-common')
 const FakeTransaction = require('../fake.js')
 
@@ -12,7 +12,7 @@ var txData = {
   to: '0xd9024df085d09398ec76fbed18cac0e1149f50dc',
   value: '0x0',
   from: '0x7e5f4552091a69125d5dfcb7b8c2659029395bdf',
-  v: '0x1c',
+  v: '0x01',
   r: '0x25641558260ac737ea6d800906c6d085a801e5e0f0952bf93978d6fa468fbdfe',
   s: '0x5d0904b8f9cfc092805df0cde2574d25e2c5fc28907a9a4741b3e857b68b0778'
 }
@@ -22,7 +22,8 @@ tape('[FakeTransaction]: Basic functions', function (t) {
     st.plan(3)
     var tx = new FakeTransaction(txData)
     var hash = tx.hash()
-    var cmpHash = Buffer.from('f74b039f6361c4351a99a7c6a10867369fe6701731d85dc07c15671ac1c1b648', 'hex')
+    // var cmpHash = Buffer.from('f74b039f6361c4351a99a7c6a10867369fe6701731d85dc07c15671ac1c1b648', 'hex')
+    var cmpHash = Buffer.from('c72825ed26f172e4526caab0d514eab689d3e35d0db63e1f83d2b43bf5a2627c', 'hex')
     st.deepEqual(hash, cmpHash, 'should create hash with includeSignature=true (default)')
     var hash2 = tx.hash(false)
     var cmpHash2 = Buffer.from('0401bf740d698674be321d0064f92cd6ebba5d73d1e5e5189c0bebbda33a85fe', 'hex')
@@ -36,7 +37,7 @@ tape('[FakeTransaction]: Basic functions', function (t) {
     st.plan(3)
     var tx = new FakeTransaction(txDataNoFrom)
     var hash = tx.hash()
-    var cmpHash = Buffer.from('80a2ca70509414908881f718502e6bbb3bc67f416abdf972ea7c0888579be7b9', 'hex')
+    var cmpHash = Buffer.from('09d9aab0df7362d3bf46999758d0a776bc06f8c4156bc1785d02af6dd7f65cb1', 'hex')
     st.deepEqual(hash, cmpHash, 'should create hash with includeSignature=true (default)')
     var hash2 = tx.hash(false)
     var cmpHash2 = Buffer.from('0401bf740d698674be321d0064f92cd6ebba5d73d1e5e5189c0bebbda33a85fe', 'hex')
