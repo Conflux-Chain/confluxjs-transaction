@@ -1,5 +1,5 @@
 {
-  "name": "confluxjs-tx",
+  "name": "confluxjs-transaction",
   "version": "0.0.1-alpha.1",
   "description": "An simple module for creating, manipulating and signing Conflux transactions",
   "main": "es5/index.js",
@@ -47,9 +47,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Conflux-Chain/confluxjs-tx.git"
+    "url": "https://github.com/Conflux-Chain/confluxjs-transaction.git"
   },
-  "homepage": "https://github.com/Conflux-Chain/confluxjs-tx",
+  "files": [
+    "es5"
+  ],
+  "homepage": "https://github.com/Conflux-Chain/confluxjs-transaction",
   "standard": {
     "ignore": [
       "es5/**",
