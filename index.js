@@ -163,11 +163,9 @@ class Transaction {
   }
 
   serialize () {
-    console.log('before ', this.v)
     if (this.v.equals(Buffer.from('00', 'hex'))) {
       this.v = ''
     }
-    console.log('after ', this.v)
     return this.rlpSerialize()
   }
 
@@ -253,7 +251,6 @@ class Transaction {
       if (this._chainId > 0) {
         v -= this._chainId * 2 + 8
       }
-      // console.log('v: ', v)
       this._senderPubKey = ethUtil.ecrecover(msgHash, v, this.r, this.s)
     } catch (e) {
       return false
