@@ -27,7 +27,7 @@
 
 ## Transaction
 
-[index.js:46-305][23]
+[index.js:52-336][23]
 
 Creates a new transaction object.
 
@@ -44,6 +44,10 @@ Creates a new transaction object.
     -   `data.r` **[Buffer][24]** EC signature parameter
     -   `data.s` **[Buffer][24]** EC signature parameter
     -   `data.chainId` **[Number][27]** EIP 155 chainId - mainnet: 1, ropsten: 3
+-   `opts` **[Array][25]** Options
+    -   `opts.chain` **([String][28] \| [Number][27])** The chain for the block [default: 'mainnet']
+    -   `opts.hardfork` **[String][28]** Hardfork for the block [default: null, block number-based behaviour]
+    -   `opts.common` **[Object][26]** Alternatively pass a Common instance (ethereumjs-common) instead of setting chain/hardfork directly
 
 ### Properties
 
@@ -68,27 +72,27 @@ var tx = new Transaction(rawTx);
 
 ### toCreationAddress
 
-[index.js:143-145][28]
+[index.js:162-164][29]
 
 If the tx's `to` is to the creation address
 
-Returns **[Boolean][29]** 
+Returns **[Boolean][30]** 
 
 ### hash
 
-[index.js:152-178][30]
+[index.js:179-205][31]
 
 Computes a sha3-256 hash of the serialized tx
 
 #### Parameters
 
--   `includeSignature` **[Boolean][29]** whether or not to inculde the signature (optional, default `true`)
+-   `includeSignature` **[Boolean][30]** whether or not to inculde the signature (optional, default `true`)
 
 Returns **[Buffer][24]** 
 
 ### getChainId
 
-[index.js:184-186][31]
+[index.js:211-213][32]
 
 returns chain ID
 
@@ -96,7 +100,7 @@ Returns **[Buffer][24]**
 
 ### getSenderAddress
 
-[index.js:192-199][32]
+[index.js:219-226][33]
 
 returns the sender's address
 
@@ -104,7 +108,7 @@ Returns **[Buffer][24]**
 
 ### getSenderPublicKey
 
-[index.js:205-210][33]
+[index.js:232-237][34]
 
 returns the public key of the sender
 
@@ -112,15 +116,15 @@ Returns **[Buffer][24]**
 
 ### verifySignature
 
-[index.js:216-234][34]
+[index.js:243-262][35]
 
 Determines if the signature is valid
 
-Returns **[Boolean][29]** 
+Returns **[Boolean][30]** 
 
 ### sign
 
-[index.js:240-247][35]
+[index.js:268-276][36]
 
 sign a transaction with a given private key
 
@@ -130,7 +134,7 @@ sign a transaction with a given private key
 
 ### getDataFee
 
-[index.js:253-260][36]
+[index.js:282-291][37]
 
 The amount of gas paid for the data in this tx
 
@@ -138,7 +142,7 @@ Returns **BN**
 
 ### getBaseFee
 
-[index.js:266-272][37]
+[index.js:297-303][38]
 
 the minimum amount of gas the tx must have (DataFee + TxFee + Creation Fee)
 
@@ -146,7 +150,7 @@ Returns **BN**
 
 ### getUpfrontCost
 
-[index.js:278-282][38]
+[index.js:309-313][39]
 
 the up front amount that an account must have for this transaction to be valid
 
@@ -154,29 +158,29 @@ Returns **BN**
 
 ### validate
 
-[index.js:289-304][39]
+[index.js:320-335][40]
 
 validates the signature and checks to see if it has enough gas
 
 #### Parameters
 
--   `stringError` **[Boolean][29]** whether to return a string with a description of why the validation failed or return a Boolean (optional, default `false`)
+-   `stringError` **[Boolean][30]** whether to return a string with a description of why the validation failed or return a Boolean (optional, default `false`)
 
-Returns **([Boolean][29] \| [String][40])** 
+Returns **([Boolean][30] \| [String][28])** 
 
 ### toJSON
 
-[index.js:116-116][41]
+[index.js:136-136][41]
 
 -   **See: [ethereumjs-util][42]**
 
 Returns the transaction in JSON format
 
-Returns **([Array][25] \| [String][40])** 
+Returns **([Array][25] \| [String][28])** 
 
 ### serialize
 
-[index.js:116-116][41]
+[index.js:136-136][41]
 
 -   **See: [ethereumjs-util][42]**
 
@@ -186,7 +190,7 @@ Returns **[Buffer][24]**
 
 ### from
 
-[index.js:123-127][43]
+[index.js:143-147][43]
 
 #### Properties
 
@@ -236,7 +240,7 @@ Returns **[Buffer][24]**
 
 [22]: #properties-1
 
-[23]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L46-L305 "Source code on GitHub"
+[23]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L52-L336 "Source code on GitHub"
 
 [24]: https://nodejs.org/api/buffer.html
 
@@ -246,34 +250,34 @@ Returns **[Buffer][24]**
 
 [27]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[28]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L143-L145 "Source code on GitHub"
+[28]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[29]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[29]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L162-L164 "Source code on GitHub"
 
-[30]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L152-L178 "Source code on GitHub"
+[30]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[31]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L184-L186 "Source code on GitHub"
+[31]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L179-L205 "Source code on GitHub"
 
-[32]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L192-L199 "Source code on GitHub"
+[32]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L211-L213 "Source code on GitHub"
 
-[33]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L205-L210 "Source code on GitHub"
+[33]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L219-L226 "Source code on GitHub"
 
-[34]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L216-L234 "Source code on GitHub"
+[34]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L232-L237 "Source code on GitHub"
 
-[35]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L240-L247 "Source code on GitHub"
+[35]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L243-L262 "Source code on GitHub"
 
-[36]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L253-L260 "Source code on GitHub"
+[36]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L268-L276 "Source code on GitHub"
 
-[37]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L266-L272 "Source code on GitHub"
+[37]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L282-L291 "Source code on GitHub"
 
-[38]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L278-L282 "Source code on GitHub"
+[38]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L297-L303 "Source code on GitHub"
 
-[39]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L289-L304 "Source code on GitHub"
+[39]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L309-L313 "Source code on GitHub"
 
-[40]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[40]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L320-L335 "Source code on GitHub"
 
-[41]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L116-L116 "Source code on GitHub"
+[41]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L136-L136 "Source code on GitHub"
 
 [42]: https://github.com/ethereumjs/ethereumjs-util/blob/master/docs/index.md#defineproperties
 
-[43]: https://git@github.com/:danjm/ethereumjs-tx/blob/ef8e9059eea7ddcc4f511e39142655d0a95ab7ef/index.js#L123-L127 "Source code on GitHub"
+[43]: https://github.com/Conflux-Chain/confluxjs-transaction/blob/8518076331dea1eaab6eb8fd33b3e1c405f28b5c/index.js#L143-L147 "Source code on GitHub"

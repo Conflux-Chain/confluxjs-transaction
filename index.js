@@ -1,6 +1,7 @@
 'use strict'
 const ethUtil = require('confluxjs-util')
 const Common = require('ethereumjs-common')
+const rlp = require('rlp')
 const BN = ethUtil.BN
 
 // secp256k1n/2
@@ -166,7 +167,8 @@ class Transaction {
     if (this.v.equals(Buffer.from('00', 'hex'))) {
       this.v = ''
     }
-    return this.rlpSerialize()
+    const newRaw = [this.raw.slice(0, 6), this.raw[6], this.raw[7], this.raw[8]]
+    return rlp.encode(newRaw)
   }
 
   /**
@@ -184,7 +186,7 @@ class Transaction {
 
     let items
     if (includeSignature) {
-      items = this.raw
+      items = [this.raw.slice(0, 6), this.raw[6], this.raw[7], this.raw[8]]
     } else {
       if (this._chainId > 0) {
         const raw = this.raw.slice()

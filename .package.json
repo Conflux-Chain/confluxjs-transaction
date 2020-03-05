@@ -1,0 +1,67 @@
+{
+  "name": "confluxjs-transaction",
+  "version": "0.0.1-alpha.2",
+  "description": "An simple module for creating, manipulating and signing Conflux transactions",
+  "main": "es5/index.js",
+  "scripts": {
+    "coverage": "istanbul cover ./test/index.js",
+    "coveralls": "npm run coverage && coveralls <coverage/lcov.info",
+    "lint": "standard",
+    "test": "npm run test:node && npm run test:browser",
+    "test:browser": "karma start karma.conf.js",
+    "test:node": "tape ./test/index.js",
+    "build:es5": "babel index.js --source-root ./ -d ./es5",
+    "build:docs": "documentation build ./index.js --github -f md > ./docs/index.md && contributor"
+  },
+  "keywords": [
+    "conflux",
+    "transactions"
+  ],
+  "author": "Yanpei Liu <ypliu@conflux-chain.org>",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "ethereumjs-common": "^0.6.1",
+    "confluxjs-util": "*",
+    "rlp": "^2.0.0"
+  },
+  "devDependencies": {
+    "async": "^2.0.0",
+    "babel-cli": "^6.22.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.0",
+    "contributor": "^0.1.25",
+    "coveralls": "^2.11.4",
+    "documentation": "^8.0.0",
+    "ethereumjs-testing": "0.0.1",
+    "istanbul": "^0.4.1",
+    "karma": "^1.1.1",
+    "karma-browserify": "^5.1.0",
+    "karma-detect-browsers": "^2.0.2",
+    "karma-env-preprocessor": "^0.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-tap": "^2.0.1",
+    "minimist": "^1.2.0",
+    "standard": "^7.1.2",
+    "tape": "^4.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Conflux-Chain/confluxjs-transaction.git"
+  },
+  "files": [
+    "es5"
+  ],
+  "homepage": "https://github.com/Conflux-Chain/confluxjs-transaction",
+  "standard": {
+    "ignore": [
+      "es5/**",
+      "dist/**",
+      "package-init.js",
+      "package.js",
+      ".idea/**",
+      "exmaples/**"
+    ]
+  }
+}
