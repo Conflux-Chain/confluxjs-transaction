@@ -181,7 +181,7 @@ class Transaction {
     if (this.v.equals(Buffer.from('00', 'hex'))) {
       this.v = ''
     }
-    const newRaw = [this.raw.slice(0, 6), this.raw[6], this.raw[7], this.raw[8]]
+    const newRaw = [this.raw.slice(0, 9), this.raw[9], this.raw[10], this.raw[11]]
     return rlp.encode(newRaw)
   }
 
@@ -202,16 +202,7 @@ class Transaction {
     if (includeSignature) {
       items = [this.raw.slice(0, 9), this.raw[9], this.raw[10], this.raw[11]]
     } else {
-      if (this._chainId > 0) {
-        const raw = this.raw.slice()
-        this.v = this._chainId
-        this.r = 0
-        this.s = 0
-        items = this.raw
-        this.raw = raw
-      } else {
-        items = this.raw.slice(0, 9)
-      }
+      items = this.raw.slice(0, 9)
     }
 
     // create hash
