@@ -1,6 +1,6 @@
 {
   "name": "confluxjs-transaction",
-  "version": "0.0.1-alpha.7",
+  "version": "0.0.2-alpha.0",
   "description": "An simple module for creating, manipulating and signing Conflux transactions",
   "main": "es5/index.js",
   "scripts": {

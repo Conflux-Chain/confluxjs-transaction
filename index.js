@@ -105,7 +105,7 @@ class Transaction {
       default: new Buffer([])
     }, {
       name: 'chainId',
-      allowZero: true,
+      allowLess: true,
       default: new Buffer([])
     }, {
       name: 'data',
