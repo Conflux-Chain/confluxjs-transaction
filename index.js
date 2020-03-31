@@ -94,6 +94,20 @@ class Transaction {
       allowLess: true,
       default: new Buffer([])
     }, {
+      name: 'storageLimit',
+      length: 32,
+      allowLess: true,
+      default: new Buffer([])
+    }, {
+      name: 'epochHeight',
+      length: 32,
+      allowLess: true,
+      default: new Buffer([])
+    }, {
+      name: 'chainId',
+      allowZero: true,
+      default: new Buffer([])
+    }, {
       name: 'data',
       alias: 'input',
       allowZero: true,
@@ -186,7 +200,7 @@ class Transaction {
 
     let items
     if (includeSignature) {
-      items = [this.raw.slice(0, 6), this.raw[6], this.raw[7], this.raw[8]]
+      items = [this.raw.slice(0, 9), this.raw[9], this.raw[10], this.raw[11]]
     } else {
       if (this._chainId > 0) {
         const raw = this.raw.slice()
@@ -196,7 +210,7 @@ class Transaction {
         items = this.raw
         this.raw = raw
       } else {
-        items = this.raw.slice(0, 6)
+        items = this.raw.slice(0, 9)
       }
     }
 
